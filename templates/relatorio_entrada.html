@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório Entrada</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/relatorio_entrada.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>Relatório Entrada</h1>
+        <img src="{{ url_for('static', filename='images/logo_dbcambui_2.png') }}" alt="Logo da Empresa">    
+    
+        <br><br>
+
+    </header>
+
+    <div class="nome-usuario">
+        <!-- EXIBE NOME DO USUÁRIO -->
+        {% if session['username'] %}
+            <h4>Bem-vindo, {{ session['username'] }}!</h4>
+        {% endif %}
+    </div>
+
+    <hr> <br>
+
+    <h2>Selecionar Carga</h2>
+
+    <div class="card">
+        <label>Transporte</label>
+        <select id="transporte"></select>
+
+        <br>
+        <br>
+
+        <button class="botao" onclick="carregarCarga()">Carregar Carga</button>
+    </div>
+
+    <h2>Produtos</h2>
+    <hr>
+
+    <div id="produtos"></div>
+
+    <button type="submit" class="botao">Salvar Contagem</button>
+
+
+    <script>
+        function mascaraData(campo) {
+            let v = campo.value.replace(/\D/g, "");
+
+            if (v.length >= 3) {
+                v = v.slice(0, 2) + "/" + v.slice(2);
+            }
+            if (v.length >= 6) {
+                v = v.slice(0, 5) + "/" + v.slice(5, 9);
+            }
+
+            campo.value = v;
+        }
+        async function carregarOpcoes() {
+            const res = await fetch('/relatorio_entrada/opcoes');
+            const dados = await res.json();
+
+            const transporteSelect = document.getElementById('transporte');
+            transporteSelect.innerHTML = '';
+
+            dados.transportes.forEach(t => {
+                transporteSelect.innerHTML += `<option value="${t}">${t}</option>`;
+            });
+        }
+
+        async function carregarCarga() {
+            const transporte = document.getElementById('transporte').value;
+
+            const res = await fetch(
+                `/relatorio_entrada/carga?transporte=${encodeURIComponent(transporte)}`
+            );
+
+            const carga = await res.json();
+            const div = document.getElementById('produtos');
+
+            div.innerHTML = '';
+
+            if (!carga.produtos || carga.produtos.length === 0) {
+                div.innerHTML = '<p>Nenhuma carga encontrada.</p>';
+                return;
+            }
+
+            div.innerHTML = `
+            <p><b>Data da carga:</b> ${formatarData(carga.data)}</p>`;
+
+            carga.produtos.forEach(p => {
+                div.innerHTML += `
+            <div class="card produto">
+            <b>${p.descricao}</b><br>
+            Código: ${p.codigo} | Quantidade: ${p.quant}
+
+            <br><br>
+
+            <div class="linha">
+                <div>
+                    <label>Fabricação</label>
+                    <input 
+                        type="text"
+                        placeholder="DD/MM/AAAA"
+                        inputmode="numeric"
+                        maxlength="10"
+                        class="data-input"
+                        oninput="mascaraData(this)">
+                </div>
+                <div>
+                    <label>Vencimento</label>
+                    <input 
+                        type="text"
+                        placeholder="DD/MM/AAAA"
+                        inputmode="numeric"
+                        maxlength="10"
+                        class="data-input"
+                        oninput="mascaraData(this)">
+                </div>
+                <div>
+                    <label>Estoque</label>
+                    <input 
+                        type="text"
+                        placeholder="DD/MM/AAAA"
+                        inputmode="numeric"
+                        maxlength="10"
+                        class="data-input"
+                        oninput="mascaraData(this)">
+                </div>
+            </div>
+        </div>`;
+            });
+        }
+
+        carregarOpcoes();
+
+        function formatarData(dataISO) {
+            if (!dataISO) return "";
+
+            const [ano, mes, dia] = dataISO.split("-");
+            return `${dia}/${mes}/${ano}`;
+        }
+    </script>
+
+</body>
+
+</html>

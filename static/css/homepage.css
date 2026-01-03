@@ -1,0 +1,32 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+header img {
+    height: 70px;
+}
+
+.botao_cadastro {
+    font-weight: bold;
+    padding: 5px 30px;
+}
+
+.botao_login {
+    font-weight: bold;
+    padding: 5px 42px;
+}
+
+hr{
+    border: 2px solid silver;
+}

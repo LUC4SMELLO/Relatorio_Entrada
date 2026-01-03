@@ -1,0 +1,1 @@
+CAMINHO_PEDIDOS_EXCEL = "arquivos/PEDIDOS CTA DEZ-25.xlsm"

@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cadastro.css') }}">
+
+
+</head>
+<body>
+
+    <header>
+        <h1>Relatório Entrada</h1>
+        <img src="{{ url_for('static', filename='images/logo_dbcambui_2.png') }}" alt="Logo da Empresa">
+    </header>
+
+    <hr>
+
+    <h1>Cadastro</h1>
+
+    <main>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="mensagens">
+                {% for category, message in messages %}
+                    <div class="alert {{ category }}">{{message}}</div>
+                {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        
+        <br>
+
+        <form action="/cadastro" method="post" class="form-style">
+
+            <label class="nome_completo" for="nome_completo">Nome Completo:</label> <br>
+            <input class="input-style" type="text" id="nome_completo" name="nome_completo">
+
+            <br><br>
+
+            <label class="senha" for="senha">Senha:</label> <br>
+            <input class="input-style" type="password" class="senha" id="senha" name="senha">
+
+            <br><br><br>
+
+            <button class="button-reset" type="reset">Cancelar</button>
+
+            <button class="button-submit" type="submit">Cadastrar</button>
+            
+        </form>
+
+    </main>
+
+    
+</body>
+</html>

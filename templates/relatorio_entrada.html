@@ -13,8 +13,8 @@
 
     <header>
         <h1>Relatório Entrada</h1>
-        <img src="{{ url_for('static', filename='images/logo_dbcambui_2.png') }}" alt="Logo da Empresa">    
-    
+        <img src="{{ url_for('static', filename='images/logo_dbcambui_2.png') }}" alt="Logo da Empresa">
+
         <br><br>
 
     </header>
@@ -22,7 +22,7 @@
     <div class="nome-usuario">
         <!-- EXIBE NOME DO USUÁRIO -->
         {% if session['username'] %}
-            <h4>Bem-vindo, {{ session['username'] }}!</h4>
+        <h4>Bem-vindo, {{ session['username'] }}!</h4>
         {% endif %}
     </div>
 
@@ -45,7 +45,7 @@
 
     <div id="produtos"></div>
 
-    <button type="submit" class="botao">Salvar Contagem</button>
+    <button type="submit" class="botao">Enviar Relatório</button>
 
 
     <script>
@@ -91,7 +91,9 @@
             }
 
             div.innerHTML = `
-            <p><b>Data da carga:</b> ${formatarData(carga.data)}</p>`;
+            <p><b>Data Prevista Chegada:</b> ${formatarData(carga.data)}
+            <br>
+            <b>Motorista:</b> ${carga.motorista}</p>`;
 
             carga.produtos.forEach(p => {
                 div.innerHTML += `

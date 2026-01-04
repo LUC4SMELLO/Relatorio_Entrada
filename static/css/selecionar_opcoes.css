@@ -1,0 +1,41 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+header img {
+    height: 70px;
+}
+
+
+.botao_contagem_estoque {
+    font-weight: bold;
+    padding: 5px 42px;
+    width: 210px;
+}
+
+.botao_contagem_doces {
+    font-weight: bold;
+    padding: 5px 30px;
+    width: 210px;
+}
+
+.botao_contagem_geladeiras {
+    font-weight: bold;
+    padding: 5px 30px;
+    width: 210px;
+}
+
+hr{
+    border: 2px solid silver;
+}

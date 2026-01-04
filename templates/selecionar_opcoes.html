@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selecionar Opções</title>
+    
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/selecionar_opcoes.css') }}">
+
+</head>
+<body>
+
+    <header>
+        <h1>Relatório Entrada</h1>
+        <img src="{{ url_for('static', filename='images/logo_dbcambui_2.png') }}" alt="Logo da Empresa">
+    </header>
+
+    <hr>
+
+    <main>
+        <p>Selecione uma opção.</p> <br>
+
+        <a href="{{ url_for('relatorio_entrada.relatorio_entrada')}}">
+            <button class="botao_contagem_estoque">Preencher Relatório</button> <br><br>
+        </a>
+
+        <a href="{{ url_for('relatorio_entrada.visualizar_relatorios')}}">
+            <button class="botao_contagem_doces">Visualizar Relatórios</button> <br><br>
+        </a>
+
+
+    </main>
+    
+</body>
+</html>

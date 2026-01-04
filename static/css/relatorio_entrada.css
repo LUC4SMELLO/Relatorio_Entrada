@@ -98,3 +98,67 @@ hr{
 .botao:hover {
     background-color: #505050;
 }
+
+.lote {
+    border: 1px solid #ddd;
+    padding: 8px;
+    margin-top: 8px;
+    border-radius: 6px;
+}
+
+.campo-qtd {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 8px;
+}
+
+.campo-qtd input {
+    width: 95%;
+    text-align: center;
+}
+
+.datas-lote {
+    display: flex;
+    gap: 6px;
+}
+
+.datas-lote div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.datas-lote input {
+    text-align: center;
+    font-size: 13px;
+}
+
+label {
+    font-size: 12px;
+    margin-bottom: 2px;
+}
+
+.ocorrencias {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-size: 13px;
+}
+
+.ocorrencias label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.campo-obs {
+    display: flex;
+    flex-direction: column;
+    margin-top: 8px;
+}
+
+.campo-obs textarea {
+    resize: none;
+    font-size: 13px;
+    padding: 4px;
+}

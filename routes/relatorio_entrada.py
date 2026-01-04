@@ -14,6 +14,10 @@ def relatorio_entrada():
 
     return render_template("relatorio_entrada_2.html")
 
+@relatorio_entrada_bp.route("/relatorio_entrada/visualizar_relatorios", methods=["GET"])
+def visualizar_relatorios():
+
+    return "Em construção...."
 
 
 @relatorio_entrada_bp.route("/relatorio_entrada/opcoes")

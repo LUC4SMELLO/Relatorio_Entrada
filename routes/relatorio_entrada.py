@@ -12,7 +12,7 @@ relatorio_entrada_bp = Blueprint("relatorio_entrada", __name__)
 @relatorio_entrada_bp.route("/relatorio_entrada", methods=["GET"])
 def relatorio_entrada():
 
-    return render_template("relatorio_entrada_2.html")
+    return render_template("relatorio_entrada.html")
 
 @relatorio_entrada_bp.route("/relatorio_entrada/visualizar_relatorios", methods=["GET"])
 def visualizar_relatorios():

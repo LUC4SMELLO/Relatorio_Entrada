@@ -48,6 +48,12 @@ def salvar_relatorio():
 
     transporte = dados["transporte"]
 
+    data_envio_relatorio = dados["data_envio_relatorio"]
+
+    data_prevista_carga = dados["data_prevista_carga"]
+
+    motorista = dados["nome_motorista"]
+
     for produto in dados["produtos"]:
         codigo = produto["codigo"]
         descricao = produto["descricao"]
@@ -63,7 +69,12 @@ def salvar_relatorio():
             vazamento = lote["vazamento"]
             observacao = lote["observacao"]
 
+        print("")
         print(transporte)
+        print(data_envio_relatorio)
+        print(data_prevista_carga)
+        print(motorista)
+        print("")
         print(codigo)
         print(descricao)
         print(quantidade)

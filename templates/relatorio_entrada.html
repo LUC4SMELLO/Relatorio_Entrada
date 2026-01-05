@@ -74,11 +74,11 @@
             }
 
             div.innerHTML = `
-        <p>
-            <b>Data Prevista Chegada:</b> ${formatarData(carga.data)}<br>
-            <b>Motorista:</b> ${carga.motorista}
-        </p>
-    `;
+            <p>
+                <b>Data Prevista Chegada:</b> <span id="data-chegada">${formatarData(carga.data)}</span><br>
+                <b>Motorista:</b> <span id="nome-motorista">${carga.motorista}</span>
+            </p>
+            `;
 
             carga.produtos.forEach((p, index) => {
                 div.innerHTML += `
@@ -173,12 +173,24 @@
 
         async function enviarRelatorio() {
 
+            // Data
+            const agora = new Date();
+            const dia = String(agora.getDate()).padStart(2, '0');
+            const mes = String(agora.getMonth() + 1).padStart(2, '0');
+            const ano = agora.getFullYear();
+            const dataEnvioFormatada = `${dia}/${mes}/${ano}`;
+
+        
             const transporte = document.getElementById("transporte").value;
+
+            const dataChegada = document.getElementById("data-chegada")?.innerText || "";
+
+            const nomeMotorista = document.getElementById("nome-motorista")?.innerText || "";
 
             const produtosDOM = document.querySelectorAll(".card.produto");
 
+            
             const produtos = [];
-
             produtosDOM.forEach(produtoEl => {
 
                 const texto = produtoEl.innerText;
@@ -216,6 +228,9 @@
 
             const payload = {
                 transporte: transporte,
+                data_envio_relatorio: dataEnvioFormatada,
+                data_prevista_carga: dataChegada,
+                nome_motorista: nomeMotorista,
                 produtos: produtos
             };
 

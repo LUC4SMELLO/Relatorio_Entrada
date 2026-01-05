@@ -27,9 +27,13 @@
     <h2>Selecionar Carga</h2>
 
     <div class="card">
-        <label>Transporte</label>
+        <label for="transporte" style="font-size: 18px;">Transporte:<label> 
         <select id="transporte"></select>
-        <br><br>
+        <br>
+
+        <div id="info-carga" style="margin-top: 15px;"></div>
+
+        <br>
         <button class="botao" onclick="carregarCarga()">Carregar Carga</button>
     </div>
 
@@ -64,37 +68,41 @@
             const transporte = document.getElementById('transporte').value;
             const res = await fetch(`/relatorio_entrada/carga?transporte=${encodeURIComponent(transporte)}`);
             const carga = await res.json();
-            const div = document.getElementById('produtos');
 
-            div.innerHTML = '';
+            const divProdutos = document.getElementById('produtos');
+            const divInfoCarga = document.getElementById('info-carga');
+
+            divProdutos.innerHTML = '';
+            divInfoCarga.innerHTML = '';
 
             if (!carga.produtos || carga.produtos.length === 0) {
-                div.innerHTML = '<p>Nenhuma carga encontrada.</p>';
+                divProdutos.innerHTML = '<p>Nenhuma carga encontrada.</p>';
                 return;
             }
 
-            div.innerHTML = `
-            <p>
-                <b>Data Prevista Chegada:</b> <span id="data-chegada">${formatarData(carga.data)}</span><br>
-                <b>Motorista:</b> <span id="nome-motorista">${carga.motorista}</span>
-            </p>
+            divInfoCarga.innerHTML = `
+                <p style="font-size: 16px;">
+                    Data Prevista Chegada: <span style="font-weight: normal" id="data-chegada">${formatarData(carga.data)}</span><br>
+                    Motorista: <span style="font-weight: normal" id="nome-motorista">${carga.motorista}</span>
+                </p>
             `;
 
+
             carga.produtos.forEach((p, index) => {
-                div.innerHTML += `
-        <div class="card produto">
-            <b>${p.descricao}</b><br>
-            Código: ${p.codigo} | Quantidade Total: ${p.quant}
+                divProdutos.innerHTML += `
+                <div class="card produto">
+                    <b>${p.descricao}</b><br>
+                    Código: ${p.codigo} | Quantidade Total: ${p.quant}
 
-            <br><br>
+                    <br><br>
 
-            <button type="button" class="botao-secundario"
-                onclick="adicionarLote(${index})">
-                + Adicionar lote
-            </button>
+                    <button type="button" class="botao-secundario"
+                        onclick="adicionarLote(${index})">
+                        + Adicionar lote
+                    </button>
 
-            <div class="lotes" id="lotes-${index}"></div>
-        </div>`;
+                    <div class="lotes" id="lotes-${index}"></div>
+                </div>`;
             });
         }
 
@@ -189,7 +197,7 @@
 
             const produtosDOM = document.querySelectorAll(".card.produto");
 
-            
+
             const produtos = [];
             produtosDOM.forEach(produtoEl => {
 

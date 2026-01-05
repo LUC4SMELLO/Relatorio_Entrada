@@ -1,7 +1,10 @@
-from flask import Blueprint, render_template, jsonify, request, session
+from flask import Blueprint, render_template, jsonify, request, session, url_for, redirect
 from scripts.cargas import carregar_cargas_excel
 
 from backend.constants.arquivos import CAMINHO_PEDIDOS_EXCEL
+
+from backend.models.relatorios import Relatorio
+
 
 
 cargas = carregar_cargas_excel(CAMINHO_PEDIDOS_EXCEL)
@@ -38,13 +41,16 @@ def carga():
 
     return jsonify(carga)
 
+@relatorio_entrada_bp.route("/relatorio_entrada/exibir_mensagem_salvamento", methods=["GET"])
+def exibir_mensagem_salvamento():
+
+    return render_template("salvar_relatorio.html")
+
 
 @relatorio_entrada_bp.route("/relatorio_entrada/salvar", methods=["POST"])
 def salvar_relatorio():
     dados = request.json
 
-    print("DADOS RECEBIDOS:")
-    print(dados)
 
     usuario_id = session.get("usuario_id")
     nome_usuario = session.get("username")
@@ -57,20 +63,13 @@ def salvar_relatorio():
 
     motorista = dados["nome_motorista"]
 
-    print("")
-    print(transporte)
-    print(usuario_id)
-    print(nome_usuario)
-    print(data_envio_relatorio)
-    print(data_prevista_carga)
-    print(motorista)
-
     for produto in dados["produtos"]:
-        codigo = produto["codigo"]
+        codigo_produto = produto["codigo"]
         descricao = produto["descricao"]
 
         for lote in produto["lotes"]:
-            quantidade = int(lote["quantidade"])
+
+            quantidade = int(lote.get("quantidade") or 0)
             estoque = lote["estoque"]
             fabricacao = lote["fabricacao"]
             vencimento = lote["vencimento"]
@@ -80,23 +79,24 @@ def salvar_relatorio():
             vazamento = lote["vazamento"]
             observacao = lote["observacao"]
 
-            print("")
-            print(codigo)
-            print(descricao)
-            print(quantidade)
-            print(estoque)
-            print(fabricacao)
-            print(vencimento)
-            print(alterar_fefo)
-            print(pallet_danificado)
-            print(vazamento)
-            print(observacao)
+
+            novo_relatorio = Relatorio(
+                transporte=transporte,
+                usuario_id=usuario_id,
+                nome_usuario=nome_usuario,
+                data_relatorio=data_envio_relatorio,
+                data_carga=data_prevista_carga,
+                codigo_produto=codigo_produto,
+                quantidade=quantidade,
+                data_estoque=estoque,
+                data_fabricacao=fabricacao,
+                data_vencimento=vencimento,
+                alterar_fefo=alterar_fefo,
+                pallet_danificado=pallet_danificado,
+                vazamento=vazamento,
+                observacao=observacao
+            )
+            novo_relatorio.inserir_relatorio()
 
 
-
-
-    
-
-    # SALVAR NO BANCO DE DADOS
-
-    return jsonify({"status": "ok"})
+    return jsonify({"status": "sucesso", "url": url_for('relatorio_entrada.exibir_mensagem_salvamento')}), 200

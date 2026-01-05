@@ -6,7 +6,7 @@ def conectar_banco_dados_usuarios():
 
     return sqlite3.connect(BANCO_DADOS_USUARIOS)
 
-def criar_banco_dados_usuarios():
+def criar_tabela_usuarios():
 
     conexao = conectar_banco_dados_usuarios()
     cursor = conexao.cursor()

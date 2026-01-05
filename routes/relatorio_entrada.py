@@ -57,6 +57,14 @@ def salvar_relatorio():
 
     motorista = dados["nome_motorista"]
 
+    print("")
+    print(transporte)
+    print(usuario_id)
+    print(nome_usuario)
+    print(data_envio_relatorio)
+    print(data_prevista_carga)
+    print(motorista)
+
     for produto in dados["produtos"]:
         codigo = produto["codigo"]
         descricao = produto["descricao"]
@@ -72,24 +80,21 @@ def salvar_relatorio():
             vazamento = lote["vazamento"]
             observacao = lote["observacao"]
 
-        print("")
-        print(transporte)
-        print(usuario_id)
-        print(nome_usuario)
-        print(data_envio_relatorio)
-        print(data_prevista_carga)
-        print(motorista)
-        print("")
-        print(codigo)
-        print(descricao)
-        print(quantidade)
-        print(estoque)
-        print(fabricacao)
-        print(vencimento)
-        print(alterar_fefo)
-        print(pallet_danificado)
-        print(vazamento)
-        print(observacao)
+            print("")
+            print(codigo)
+            print(descricao)
+            print(quantidade)
+            print(estoque)
+            print(fabricacao)
+            print(vencimento)
+            print(alterar_fefo)
+            print(pallet_danificado)
+            print(vazamento)
+            print(observacao)
+
+
+
+
     
 
     # SALVAR NO BANCO DE DADOS

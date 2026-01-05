@@ -98,6 +98,23 @@ hr{
     background-color: #505050;
 }
 
+.botao-secundario {
+    background-color: rgb(0, 0, 0);
+    font-weight: bold;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background 0.3s;
+}
+
+.botao-secundario:hover{
+    background-color: #505050;
+}
+
 .lote {
     border: 1px solid #ddd;
     padding: 8px;

@@ -248,8 +248,16 @@
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(payload)
-            });
-        }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "sucesso") {
+
+                    window.location.href = data.url; 
+                } else {
+                    alert("Erro ao salvar: " + data.mensagem);
+                }
+            })};
     </script>
 
 </body>

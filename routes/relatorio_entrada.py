@@ -4,7 +4,7 @@ from scripts.cargas import carregar_cargas_excel
 from backend.constants.arquivos import CAMINHO_PEDIDOS_EXCEL
 
 from backend.models.relatorios import Relatorio
-
+from backend.models.relatorios_temporarios import RelatoriosTemporarios
 
 
 cargas = carregar_cargas_excel(CAMINHO_PEDIDOS_EXCEL)
@@ -97,6 +97,31 @@ def salvar_relatorio():
                 observacao=observacao
             )
             novo_relatorio.inserir_relatorio()
+        
+    RelatoriosTemporarios.excluir(usuario_id)
 
 
     return jsonify({"status": "sucesso", "url": url_for('relatorio_entrada.exibir_mensagem_salvamento')}), 200
+
+
+@relatorio_entrada_bp.route("/relatorio_entrada/salvar_rascunho", methods=["POST"])
+def salvar_rascunho():
+    usuario = session.get("usuario_id")
+    dados = request.json
+
+    RelatoriosTemporarios.salvar(usuario, dados)
+
+    return {"status": "ok"}
+
+@relatorio_entrada_bp.route("/relatorio_entrada/carregar_rascunho", methods=["GET"])
+def carregar_rascunho():
+    usuario = session.get("usuario_id")
+    rascunho = RelatoriosTemporarios.buscar(usuario)
+
+    if not rascunho:
+        return {"existe": False}
+
+    return {
+        "existe": True,
+        "dados": rascunho
+    }

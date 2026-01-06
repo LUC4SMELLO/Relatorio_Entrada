@@ -1,7 +1,10 @@
 import pandas as pd
 
+from backend.constants.arquivos import DICIONARIO_FABRICAS
+
 
 def carregar_cargas_excel(caminho_arquivo):
+
     df_produtos = pd.read_excel(
         caminho_arquivo,
         sheet_name="RELATÓRIO",
@@ -9,6 +12,13 @@ def carregar_cargas_excel(caminho_arquivo):
     )
 
     df_produtos = df_produtos.rename(columns={0: "Transporte"})
+
+    df_produtos["Cód Fabrica"] = (
+        pd.to_numeric(df_produtos["Cód Fabrica"], errors="coerce")
+        .dropna()
+        .astype(int)
+        .astype(str)
+    )
 
     df_produtos["Transporte"] = (
         pd.to_numeric(df_produtos["Transporte"], errors="coerce")
@@ -22,9 +32,13 @@ def carregar_cargas_excel(caminho_arquivo):
     COL_CODIGO = "Código"
     COL_QTD = "Quant"
     COL_DESC = "Descrição"
+    COL_COD_FABRICA = "Cód Fabrica"
 
     df_produtos = df_produtos.dropna(subset=[COL_TRANSPORTE, COL_DATA, COL_CODIGO])
     df_produtos[COL_QTD] = df_produtos[COL_QTD].fillna(0).astype(int)
+
+
+
 
     df_motorista = pd.read_excel(
         caminho_arquivo,
@@ -50,17 +64,23 @@ def carregar_cargas_excel(caminho_arquivo):
         .to_dict()
     )
 
+
+
+    
+
     cargas = {}
 
     for _, row in df_produtos.iterrows():
         transporte = row[COL_TRANSPORTE]
         data = str(pd.to_datetime(row[COL_DATA]).date())
+        origem = DICIONARIO_FABRICAS.get(row[COL_COD_FABRICA], "Não Informado")
 
         if transporte not in cargas:
             cargas[transporte] = {
                 "transporte": transporte,
                 "motorista": mapa_motoristas.get(transporte, "Não informado"),
                 "data": data,
+                "origem": origem,
                 "produtos": []
             }
 

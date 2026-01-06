@@ -44,6 +44,7 @@ class Relatorio:
     def __init__(
             self,
             transporte: str,
+            origem : str,
             usuario_id: str,
             nome_usuario: str,
             data_relatorio: str,
@@ -65,6 +66,8 @@ class Relatorio:
         ----------
             transporte : str
                 O número do transporte.
+            origem : str
+                A origem da carga.
             usuario_id : str
                 O id do usuário que preencheu o relatório.
             nome_usuario : str
@@ -93,6 +96,7 @@ class Relatorio:
                 Alguma observação feita pelo usuário.
         """
         self.transporte = transporte
+        self.origem = origem
         self.usuario_id = usuario_id
         self.nome_usuario = nome_usuario
         self.data_relatorio = data_relatorio
@@ -117,6 +121,7 @@ class Relatorio:
             f"""
             INSERT INTO {TABELA_RELATORIOS} (
             transporte,
+            origem,
             usuario_id,
             nome_usuario,
             data_relatorio,
@@ -131,10 +136,11 @@ class Relatorio:
             vazamento,
             observacao
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 self.transporte,
+                self.origem,
                 self.usuario_id,
                 self.nome_usuario,
                 self.data_relatorio,

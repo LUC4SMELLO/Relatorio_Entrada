@@ -27,7 +27,7 @@
     <h2>Selecionar Carga</h2>
 
     <div class="card">
-        <label>Transporte:</label>
+        <label style="font-size: 16px;">Transporte:</label>
         <select id="transporte"></select>
         <br><br>
 
@@ -93,13 +93,13 @@
             }
 
             divInfo.innerHTML = `
-        <p>
+        <p style="font-weight: bold">
             Data Prevista Chegada:
-            <span id="data-chegada">${formatarData(carga.data)}</span><br>
+            <span style="font-weight: normal" id="data-chegada">${formatarData(carga.data)}</span><br>
             Motorista:
-            <span id="nome-motorista">${carga.motorista}</span><br>
+            <span style="font-weight: normal" id="nome-motorista">${carga.motorista}</span><br>
             Origem:
-            <span id="origem">${carga.origem}</span>
+            <span style="font-weight: normal" id="origem">${carga.origem}</span>
         </p>
     `;
 

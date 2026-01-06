@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, jsonify, request, session, url_for, redirect
+from flask import Blueprint, render_template, jsonify, request, session, url_for
 from scripts.cargas import carregar_cargas_excel
 
 from backend.constants.arquivos import CAMINHO_PEDIDOS_EXCEL
@@ -63,6 +63,9 @@ def salvar_relatorio():
 
     motorista = dados["nome_motorista"]
 
+    origem = dados["origem"]
+
+
     for produto in dados["produtos"]:
         codigo_produto = produto["codigo"]
         descricao = produto["descricao"]
@@ -82,6 +85,7 @@ def salvar_relatorio():
 
             novo_relatorio = Relatorio(
                 transporte=transporte,
+                origem=origem,
                 usuario_id=usuario_id,
                 nome_usuario=nome_usuario,
                 data_relatorio=data_envio_relatorio,

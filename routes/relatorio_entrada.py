@@ -3,6 +3,8 @@ import json
 
 from scripts.cargas import carregar_cargas_excel
 
+from backend.validators.validar_data import formatar_data_sqlite
+
 from backend.constants.arquivos import CAMINHO_PEDIDOS_EXCEL
 
 from backend.models.relatorios import Relatorio
@@ -76,9 +78,9 @@ def salvar_relatorio():
         for lote in produto["lotes"]:
 
             quantidade = int(lote.get("quantidade") or 0)
-            estoque = lote["estoque"]
-            fabricacao = lote["fabricacao"]
-            vencimento = lote["vencimento"]
+            estoque = formatar_data_sqlite(lote["estoque"])
+            fabricacao = formatar_data_sqlite(lote["fabricacao"])
+            vencimento = formatar_data_sqlite(lote["vencimento"])
 
             alterar_fefo = lote["alterar_fefo"]
             pallet_danificado = lote["pallet_danificado"]

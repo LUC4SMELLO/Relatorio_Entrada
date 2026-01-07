@@ -17,6 +17,7 @@ def criar_tabela_relatorios():
     CREATE TABLE IF NOT EXISTS {TABELA_RELATORIOS} (
         transporte INTEGER,
         origem VARCHAR(50),
+        ordens VARCHAR(250),
         usuario_id VARCHAR(10),
         nome_usuario VARCHAR(250),
         data_relatorio VARCHAR(10),

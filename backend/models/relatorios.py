@@ -11,6 +11,10 @@ class Relatorio:
     ----------
         transporte : str
             O número do transporte.
+        origem : str
+            O local do carregamento.
+        ordens : str
+            As ordens de carregamento da carga.
         usuario_id : str
             O id do usuário que preencheu o relatório.
         nome_usuario : str
@@ -45,6 +49,7 @@ class Relatorio:
             self,
             transporte: str,
             origem : str,
+            ordens : str,
             usuario_id: str,
             nome_usuario: str,
             data_relatorio: str,
@@ -67,7 +72,9 @@ class Relatorio:
             transporte : str
                 O número do transporte.
             origem : str
-                A origem da carga.
+                O local do carregamento.
+            ordens : str
+                As ordens de carregamento da carga.
             usuario_id : str
                 O id do usuário que preencheu o relatório.
             nome_usuario : str
@@ -97,6 +104,7 @@ class Relatorio:
         """
         self.transporte = transporte
         self.origem = origem
+        self.ordens = ordens
         self.usuario_id = usuario_id
         self.nome_usuario = nome_usuario
         self.data_relatorio = data_relatorio
@@ -122,6 +130,7 @@ class Relatorio:
             INSERT INTO {TABELA_RELATORIOS} (
             transporte,
             origem,
+            ordens,
             usuario_id,
             nome_usuario,
             data_relatorio,
@@ -136,11 +145,12 @@ class Relatorio:
             vazamento,
             observacao
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 self.transporte,
                 self.origem,
+                self.ordens,
                 self.usuario_id,
                 self.nome_usuario,
                 self.data_relatorio,

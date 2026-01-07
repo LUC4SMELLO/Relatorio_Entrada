@@ -99,7 +99,9 @@
             Motorista:
             <span style="font-weight: normal" id="nome-motorista">${carga.motorista}</span><br>
             Origem:
-            <span style="font-weight: normal" id="origem">${carga.origem}</span>
+            <span style="font-weight: normal" id="origem">${carga.origem}</span><br>
+            Ordens:
+            <span style="font-weight: normal" id="ordens">${carga.ordens}</span>
         </p>
     `;
 
@@ -205,6 +207,7 @@
             document.getElementById("data-chegada").innerText = d.data_prevista_carga;
             document.getElementById("nome-motorista").innerText = d.nome_motorista;
             document.getElementById("origem").innerText = d.origem;
+            document.getElementById("ordens").innerText = d.ordens;
 
             d.produtos.forEach(prod => {
                 prod.lotes.forEach(lote => {
@@ -262,6 +265,7 @@
                 data_prevista_carga: document.getElementById("data-chegada")?.innerText,
                 nome_motorista: document.getElementById("nome-motorista")?.innerText,
                 origem: document.getElementById("origem")?.innerText,
+                ordens: document.getElementById("ordens")?.innerText,
                 produtos
             };
         }
@@ -299,6 +303,8 @@
             const nomeMotorista = document.getElementById("nome-motorista")?.innerText || "";
 
             const origem = document.getElementById("origem")?.innerText || "";
+
+            const ordens = document.getElementById("ordens")?.innerText || "";
 
             const produtosDOM = document.querySelectorAll(".card.produto");
 
@@ -345,6 +351,7 @@
                 data_prevista_carga: dataChegada,
                 nome_motorista: nomeMotorista,
                 origem: origem,
+                ordens: ordens,
                 produtos: produtos
             };
 

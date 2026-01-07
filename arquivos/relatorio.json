@@ -1,0 +1,26 @@
+{
+    "transporte": "31",
+    "data_envio_relatorio": "07/01/2026",
+    "data_prevista_carga": "16/12/2025",
+    "nome_motorista": "Evandro Aparecido da Costa",
+    "origem": "Três Corações",
+    "ordens": "4007101423, 61026027, 61012022, 60874521, 60866858, 60248989",
+    "produtos": [
+        {
+            "codigo": "56016",
+            "descricao": "KS Ultra coca zero",
+            "lotes": [
+                {
+                    "quantidade": "1400",
+                    "estoque": "22/10/2025",
+                    "fabricacao": "22/10/2025",
+                    "vencimento": "22/10/2025",
+                    "alterar_fefo": true,
+                    "pallet_danificado": true,
+                    "vazamento": false,
+                    "observacao": ""
+                }
+            ]
+        }
+    ]
+}
